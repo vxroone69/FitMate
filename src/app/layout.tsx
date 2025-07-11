@@ -1,5 +1,3 @@
-"use client";
-
 import { type Metadata } from 'next'
 import {
   SignInButton,
@@ -10,7 +8,8 @@ import {
 } from '@clerk/nextjs'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import ConvexClerkProvider from '@/providers/ConvexClerkProvider'
+import ConvexClerkProvider from '../providers/ConvexClerkProvider'
+
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
