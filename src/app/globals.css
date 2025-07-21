@@ -235,3 +235,125 @@
 .animate-fadeIn {
   animation: fadeIn 0.5s ease-in-out forwards;
 }
+
+/* Glow animations */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) rotate(12deg); 
+  }
+  50% { 
+    transform: translateY(-20px) rotate(18deg); 
+  }
+}
+
+@keyframes drift {
+  0%, 100% { 
+    transform: translateX(0px) rotate(-6deg); 
+  }
+  50% { 
+    transform: translateX(15px) rotate(-12deg); 
+  }
+}
+
+@keyframes spin {
+  0% { 
+    transform: rotate(45deg); 
+  }
+  100% { 
+    transform: rotate(405deg); 
+  }
+}
+
+@keyframes glow {
+  0%, 100% { 
+    opacity: 0.15; 
+  }
+  50% { 
+    opacity: 0.25; 
+  }
+}
+
+@keyframes breathe {
+  0%, 100% { 
+    transform: scale(1) rotate(45deg); 
+  }
+  50% { 
+    transform: scale(1.1) rotate(45deg); 
+  }
+}
+
+/* Glow animation classes */
+.glow-primary {
+  animation: float 8s ease-in-out infinite, pulse 4s ease-in-out infinite;
+}
+
+.glow-secondary {
+  animation: drift 12s ease-in-out infinite, glow 6s ease-in-out infinite;
+}
+
+.glow-tertiary {
+  animation: spin 15s linear infinite, breathe 5s ease-in-out infinite;
+}
+
+/* In your CSS file (e.g., globals.css or a dedicated module) */
+
+.silver-glow-button {
+  position: relative; /* Needed for the pseudo-element or for positioning the shadow */
+  transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+}
+
+.silver-glow-button:hover {
+  /* You can adjust the spread and blur for the desired glow intensity */
+  box-shadow: 0 0 20px 5px rgba(192, 192, 192, 0.7), /* Silver glow */
+              0 0 30px 10px rgba(220, 220, 220, 0.5); /* Lighter silver/white inner glow */
+  transform: translateY(-2px); /* Optional: A slight lift effect */
+}
+
+/* Optional: If you want a more advanced, diffused glow, you can use a pseudo-element */
+/* This can be more performant for complex glows than multiple box-shadows */
+.silver-glow-button::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: radial-gradient(circle, rgba(192,192,192,0.7) 0%, rgba(220,220,220,0.5) 50%, transparent 100%);
+  filter: blur(15px); /* Adjust blur for glow diffusion */
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  z-index: -1; /* Ensure it stays behind the button content */
+}
+
+.silver-glow-button:hover::before {
+  opacity: 1;
+}
+
+/* In your CSS file (e.g., globals.css) */
+
+@keyframes scoreboardChange {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.animate-scoreboard-change {
+  animation: scoreboardChange 0.5s ease-in-out forwards; /* Adjust duration and timing as needed */
+}
+
+/* Ensure that when the number is stable, it remains visible */
+/* This is often handled by re-applying the opacity: 1 after the animation completes */
+/* Or, by structuring the animation to fade in and out */
